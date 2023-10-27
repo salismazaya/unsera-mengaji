@@ -1,0 +1,9 @@
+__pycache__
+Env
+node_modules
+tailwind.css
+tailwind.min.css
+package-lock.json
+db.sqlite3
+staticfiles
+.env.production

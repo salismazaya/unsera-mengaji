@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | {{ TITLE }}</title>
+    <link rel="stylesheet" href="{{ tailwind_css_static }}">
+    <script src="https://unpkg.com/alpinejs@3.9.3/dist/cdn.min.js" defer></script>
+</head>
+<body class="font-mono">
+    {% block content %}
+    {% endblock %}
+    
+    <div class="fixed bottom-0 right-0 p-5">
+        <div class="p-1 rounded-full bg-white drop-shadow-md">
+            <a href="https://github.com/salismazaya/unsera-mengaji" target="_blank">
+                <img src="{% static 'img/github.svg' %}" class="w-10">
+            </a>
+        </div>
+    </div>
+    
+    {% block js %}
+    {% endblock%}
+
+
+</body>
+</html>

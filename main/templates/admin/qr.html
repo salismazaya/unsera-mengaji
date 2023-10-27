@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<p id="nama"></p>
+<div id="reader" width="600px"></div>
+
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="https://unpkg.com/axios@1.4.0/dist/axios.min.js"></script>
+
+<script>
+    async function onScanSuccess(decodedText, decodedResult) {
+        const response = await axios.post('/admin/api/qr/', {
+            id: decodedText
+        });
+        const nama = response.data;
+
+        if (nama != '!') {
+            document.getElementById('nama').innerHTML = nama;
+        }
+    }
+
+    function onScanFailure(error) {
+        // console.warn(`Code scan error = ${error}`);
+    }
+
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: {width: 250, height: 250} },
+    false);
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+</script>
+{% endblock %}
