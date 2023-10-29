@@ -1,11 +1,12 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from main.models import Customer, User
+from main.models import User
 
 class RegisterForm(forms.Form):
     username = forms.CharField(max_length = 30, min_length = 3, validators = [
-        RegexValidator(r'^\w+$')
+        RegexValidator(r'^\w+$'),
+        RegexValidator(r'^[a-z0-9]+$', message = 'Hanya mendukung karakter huruf kecil'),
     ])
     nama = forms.CharField(max_length = 255)
     nim = forms.CharField(max_length = 20, validators = [
@@ -25,7 +26,7 @@ class RegisterForm(forms.Form):
         
         return username
     
-    def konfirmasi_password_clean(self):
+    def clean_konfirmasi_password(self):
         password = self.cleaned_data['konfirmasi_password']
         password2 = self.data['password']
 
@@ -36,7 +37,7 @@ class RegisterForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length = 30, min_length = 3)
+    username = forms.CharField(max_length = 30, min_length = 3, help_text = 'Huruf besar kecil berpengaruh')
     password = forms.CharField(widget = forms.PasswordInput())
 
     def clean_username(self):

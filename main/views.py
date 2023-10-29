@@ -68,6 +68,9 @@ def register(request: HttpRequest):
 
 @login_required
 def dashboard(request: HttpRequest):
+    if request.user.is_staff:
+        return redirect('/admin')
+
     customer = Customer.objects.cache().get(user__pk = request.user.pk)
     absen = Absen.objects.cache().filter(customer__id = customer.id)
     context = {

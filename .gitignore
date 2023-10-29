@@ -7,3 +7,6 @@ package-lock.json
 db.sqlite3
 staticfiles
 .env.production
+dump.py
+data.csv
+*_bak\.html
